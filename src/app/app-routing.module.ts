@@ -1,20 +1,25 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from "./home/home.component";
+import { HomeComponent } from './home/home.component';
+
+//   loadChildren: () => import('../Supplier/CustomerApp.SupplierModule').then(x => x.CustomerAppSupplierModule)
 
 const appRoutes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: '', component: HomeComponent },
   {
-    path: "customers",
-    loadChildren: "../app/customers/customers.module#CustomersModule"
-  }
+    path: 'customers',
+    loadChildren: () =>
+      import('../app/customers/customers.module').then(
+        (x) => x.CustomersModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
-  declarations: []
+  declarations: [],
 })
 export class AppRoutingModule {}
